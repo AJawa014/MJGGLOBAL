@@ -1,22 +1,29 @@
+
 import React, { useState } from 'react';
 import { CartItem, CustomerDetails, Order } from '../types';
 import { Button, Input, SectionHeader } from './UI';
 import { Receipt } from './Receipt';
 import { ShieldCheck } from 'lucide-react';
+import { useAppContext } from '../App';
 
 interface BookingFormProps {
   item: CartItem;
 }
 
 export const BookingForm: React.FC<BookingFormProps> = ({ item }) => {
+  const { addOrder } = useAppContext();
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [loading, setLoading] = useState(false);
   const [completedOrder, setCompletedOrder] = useState<Order | null>(null);
   
   const [details, setDetails] = useState<CustomerDetails>({
     name: '',
+    phone: '',
+    organization: '',
     email: '',
-    address: ''
+    address: '',
+    fromDestination: '',
+    toDestination: ''
   });
 
   const handleSubmitDetails = (e: React.FormEvent) => {
@@ -27,23 +34,24 @@ export const BookingForm: React.FC<BookingFormProps> = ({ item }) => {
   const handlePayment = async () => {
     setLoading(true);
     
-    // Simulate API Call using the code structure provided for api/submit-order.ts
-    // In a real app: fetch('/api/submit-order', ...)
-    
+    // Simulate API Call
     setTimeout(() => {
       setLoading(false);
       setStep(3); // Processing animation
       
       setTimeout(() => {
-        setCompletedOrder({
+        const newOrder: Order = {
           id: 'ORD-' + Math.floor(Math.random() * 10000),
           items: [item],
           total: item.price,
           customer: details,
           status: 'paid',
           date: new Date().toISOString(),
-          trackingId: 'TRK-8829-XJ'
-        });
+          trackingId: 'TRK-' + Math.random().toString(36).substr(2, 9).toUpperCase()
+        };
+        
+        setCompletedOrder(newOrder);
+        addOrder(newOrder); // Save to global context
         setStep(4);
       }, 2000);
     }, 1500);
@@ -79,37 +87,104 @@ export const BookingForm: React.FC<BookingFormProps> = ({ item }) => {
 
       {step === 1 ? (
         <form onSubmit={handleSubmitDetails} className="space-y-4">
-          <SectionHeader title="Delivery Details" subtitle="Where should we send your order?" />
+          <SectionHeader title="Order Details" subtitle="Please provide booking information" />
           
           <div className="space-y-4">
-            <div>
-              <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Full Name</label>
-              <Input 
-                required 
-                placeholder="John Doe" 
-                value={details.name}
-                onChange={e => setDetails({...details, name: e.target.value})}
-              />
-            </div>
-            <div>
-              <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Email</label>
-              <Input 
-                required 
-                type="email" 
-                placeholder="john@example.com" 
-                value={details.email}
-                onChange={e => setDetails({...details, email: e.target.value})}
-              />
-            </div>
-            <div>
-              <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Address</label>
-              <Input 
-                required 
-                placeholder="123 Innovation Dr, Tech City" 
-                value={details.address}
-                onChange={e => setDetails({...details, address: e.target.value})}
-              />
-            </div>
+            {item.category === 'drink' ? (
+              // SOFT DRINKS MART FORM
+              <>
+                <div>
+                  <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Full Name</label>
+                  <Input 
+                    required 
+                    placeholder="John Doe" 
+                    value={details.name}
+                    onChange={e => setDetails({...details, name: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Phone Number</label>
+                  <Input 
+                    required 
+                    type="tel"
+                    placeholder="08012345678" 
+                    value={details.phone}
+                    onChange={e => setDetails({...details, phone: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Delivery Address</label>
+                  <Input 
+                    required 
+                    placeholder="Street Address, City" 
+                    value={details.address}
+                    onChange={e => setDetails({...details, address: e.target.value})}
+                  />
+                </div>
+              </>
+            ) : (
+              // CAR HIRE (GLIDE) FORM
+              <>
+                <div>
+                  <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Organization Name</label>
+                  <Input 
+                    required 
+                    placeholder="Company or Individual Name" 
+                    value={details.organization}
+                    onChange={e => setDetails({...details, organization: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Phone Number</label>
+                  <Input 
+                    required 
+                    type="tel" 
+                    placeholder="08012345678" 
+                    value={details.phone}
+                    onChange={e => setDetails({...details, phone: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Email</label>
+                  <Input 
+                    required 
+                    type="email" 
+                    placeholder="contact@mjgglobal.com" 
+                    value={details.email}
+                    onChange={e => setDetails({...details, email: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">Address</label>
+                  <Input 
+                    required 
+                    placeholder="HQ Address" 
+                    value={details.address}
+                    onChange={e => setDetails({...details, address: e.target.value})}
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">From</label>
+                    <Input 
+                      required 
+                      placeholder="Origin" 
+                      value={details.fromDestination}
+                      onChange={e => setDetails({...details, fromDestination: e.target.value})}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-white/60 ml-1 mb-1 block">To</label>
+                    <Input 
+                      required 
+                      placeholder="Destination" 
+                      value={details.toDestination}
+                      onChange={e => setDetails({...details, toDestination: e.target.value})}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
           <Button type="submit" className="mt-6">
@@ -123,19 +198,19 @@ export const BookingForm: React.FC<BookingFormProps> = ({ item }) => {
            <div className="glass-panel p-5 rounded-2xl space-y-4 border-l-4 border-l-[#0A84FF]">
               <div className="flex items-center gap-3 text-white/80">
                 <ShieldCheck className="text-[#0A84FF]" />
-                <span className="font-semibold">Bank Transfer</span>
+                <span className="font-semibold">Bank Transfer (Naira)</span>
               </div>
               <div className="space-y-2 text-sm text-white/60 font-mono">
-                <p>Bank: Future Finance Corp</p>
-                <p>Account: 8829 1002 9384</p>
-                <p>Sort Code: 20-40-60</p>
-                <p>Ref: {item.id.toUpperCase()}-USER</p>
+                <p>Bank: MJG Global Bank</p>
+                <p>Account: 0011223344</p>
+                <p>Sort Code: 12-34-56</p>
+                <p>Ref: {item.id.toUpperCase()}-PAY</p>
               </div>
            </div>
 
            <div className="bg-white/5 p-4 rounded-xl flex items-center justify-between">
               <span className="text-white/70">Total to Pay</span>
-              <span className="text-xl font-bold">${item.price.toFixed(2)}</span>
+              <span className="text-xl font-bold">₦{item.price.toLocaleString()}</span>
            </div>
 
            <Button onClick={handlePayment} isLoading={loading}>

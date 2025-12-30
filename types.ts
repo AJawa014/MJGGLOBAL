@@ -1,3 +1,4 @@
+
 export type Category = 'drink' | 'vehicle';
 
 export interface Product {
@@ -15,6 +16,18 @@ export interface CartItem extends Product {
   quantity: number;
 }
 
+export interface CustomerDetails {
+  address: string;
+  // Mart Specific
+  name?: string;
+  phone?: string;
+  // Glide Specific
+  organization?: string;
+  email?: string;
+  fromDestination?: string;
+  toDestination?: string;
+}
+
 export interface Order {
   id: string;
   items: CartItem[];
@@ -23,12 +36,6 @@ export interface Order {
   status: 'pending' | 'paid' | 'delivered';
   date: string;
   trackingId: string;
-}
-
-export interface CustomerDetails {
-  name: string;
-  email: string;
-  address: string;
 }
 
 export type CheckoutStep = 'details' | 'payment' | 'processing' | 'receipt';
