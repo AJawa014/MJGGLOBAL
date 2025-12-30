@@ -16,7 +16,7 @@ export const Receipt: React.FC<ReceiptProps> = ({ order }) => {
     // Header
     doc.setFontSize(22);
     doc.setTextColor(10, 132, 255); // SF Blue
-    doc.text('Zest & Glide', 105, y, { align: 'center' });
+    doc.text('MJGGLOBAL', 105, y, { align: 'center' });
     y += 15;
 
     doc.setFontSize(12);

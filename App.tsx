@@ -15,13 +15,13 @@ const Home = () => (
   <div className="p-6 space-y-8 pt-12 min-h-screen pb-24">
     <div className="space-y-2">
       <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
-        Zest & Glide
+        MJGGLOBAL
       </h1>
       <p className="text-white/50 text-lg">Premium essentials for your journey.</p>
     </div>
 
     <div className="grid gap-6">
-      <Link to="/mart" className="group relative h-64 rounded-[32px] overflow-hidden glass-panel transition-transform active:scale-95">
+      <Link to="/mart" className="block group relative h-64 rounded-[32px] overflow-hidden glass-panel transition-transform active:scale-95 cursor-pointer">
         <img 
           src="https://picsum.photos/800/600?random=10" 
           className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" 
@@ -37,7 +37,7 @@ const Home = () => (
         </div>
       </Link>
 
-      <Link to="/glide" className="group relative h-64 rounded-[32px] overflow-hidden glass-panel transition-transform active:scale-95">
+      <Link to="/glide" className="block group relative h-64 rounded-[32px] overflow-hidden glass-panel transition-transform active:scale-95 cursor-pointer">
         <img 
           src="https://picsum.photos/800/600?random=11" 
           className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" 
