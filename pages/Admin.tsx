@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MOCK_PRODUCTS } from '../data';
 import { Product } from '../types';
-import { Button, Input, SectionHeader } from '../components/UI';
-import { Edit2, Package, Plus, Trash2, ArrowLeft } from 'lucide-react';
+import { Button, SectionHeader } from '../components/UI';
+import { Edit2, Package, Plus, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Admin() {

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { MOCK_PRODUCTS } from './data';
 import { Product } from './types';
 import { Sheet } from './components/Sheet';
-import { Button, cn } from './components/UI';
+import { Button } from './components/UI';
 import { BookingForm } from './components/BookingForm';
 import Admin from './pages/Admin';
 import { ShoppingBag, Car, ChevronRight, Zap } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 // --- Page Components ---
 

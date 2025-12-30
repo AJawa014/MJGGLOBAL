@@ -2,7 +2,7 @@ import React from 'react';
 import { jsPDF } from 'jspdf';
 import { Button } from './UI';
 import { Order } from '../types';
-import { Download, CheckCircle, Share2 } from 'lucide-react';
+import { Download, CheckCircle } from 'lucide-react';
 
 interface ReceiptProps {
   order: Order;
@@ -11,7 +11,6 @@ interface ReceiptProps {
 export const Receipt: React.FC<ReceiptProps> = ({ order }) => {
   const downloadPDF = () => {
     const doc = new jsPDF();
-    const lineHeight = 10;
     let y = 20;
 
     // Header

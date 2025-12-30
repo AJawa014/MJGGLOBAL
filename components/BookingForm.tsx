@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { CartItem, CustomerDetails, Order } from '../types';
 import { Button, Input, SectionHeader } from './UI';
 import { Receipt } from './Receipt';
-import { CreditCard, Truck, ShieldCheck } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ShieldCheck } from 'lucide-react';
 
 interface BookingFormProps {
   item: CartItem;
