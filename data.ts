@@ -1,0 +1,66 @@
+import { Product } from './types';
+
+export const MOCK_PRODUCTS: Product[] = [
+  {
+    id: 'd1',
+    name: 'Nebula Nectar',
+    category: 'drink',
+    price: 12.99,
+    description: 'Sparkling botanical infusion with rare yuzu and elderflower.',
+    image: 'https://picsum.photos/400/600?random=1',
+    details: ['0g Sugar', 'Natural Caffeine', 'Vitamin B12'],
+    inStock: true,
+  },
+  {
+    id: 'd2',
+    name: 'Quantum Cola',
+    category: 'drink',
+    price: 8.50,
+    description: 'A dark, spicy cola blend aged in oak barrels for 48 hours.',
+    image: 'https://picsum.photos/400/600?random=2',
+    details: ['Oak Aged', 'Organic Cane Sugar', 'Spicy Finish'],
+    inStock: true,
+  },
+  {
+    id: 'd3',
+    name: 'Zenith Matcha',
+    category: 'drink',
+    price: 15.00,
+    description: 'Ceremonial grade matcha cold brewed with coconut water.',
+    image: 'https://picsum.photos/400/600?random=3',
+    details: ['Antioxidant Rich', 'Dairy Free', 'Kyoto Sourced'],
+    inStock: false,
+  },
+  {
+    id: 'v1',
+    name: 'Spectre GT',
+    category: 'vehicle',
+    price: 450,
+    description: 'Electric grand tourer. 0-60 in 2.5s. Pure silent luxury.',
+    image: 'https://picsum.photos/600/400?random=4',
+    details: ['Top Speed: 200mph', 'Range: 400mi', 'Autopilot L4'],
+    inStock: true,
+  },
+  {
+    id: 'v2',
+    name: 'Obsidian SUV',
+    category: 'vehicle',
+    price: 380,
+    description: 'Armored luxury SUV with executive rear seating.',
+    image: 'https://picsum.photos/600/400?random=5',
+    details: ['Bulletproof Glass', 'Massage Seats', 'Starry Ceiling'],
+    inStock: true,
+  },
+  {
+    id: 'v3',
+    name: 'Solaris Convertible',
+    category: 'vehicle',
+    price: 520,
+    description: 'Open-top hybrid sports car for the ultimate coastal drive.',
+    image: 'https://picsum.photos/600/400?random=6',
+    details: ['Hybrid V6', 'Carbon Fiber Body', 'Bose Sound System'],
+    inStock: true,
+  },
+];
+
+export const MOCK_ORDERS: any[] = []; // In-memory orders for demo
